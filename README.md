@@ -2,7 +2,7 @@
 
 A hubot script that sends hashtagged messages to a specified email address.
 
-See [`src/hello-world.coffee`](src/hello-world.coffee) for full documentation.
+See [`src/email-hashtag.coffee`](src/email-hashtag.coffee) for full documentation.
 
 ## Installation
 
@@ -24,10 +24,3 @@ Add **hubot-email-hashtag** to your `external-scripts.json`:
 ```
 
 Run `npm install`
-
-## Sample Interaction
-
-```
-user1>> hubot hello
-hubot>> hello!
-```

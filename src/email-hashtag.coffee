@@ -16,13 +16,17 @@
 #   patcon@myplanetdigital
 
 Mailgun = require 'mailgun-js'
+config =
+  api_key: process.env.HUBOT_MAILGUN_APIKEY
+  mg_domain: process.env.HUBOT_MAILGUN_DOMAIN
+  to_domain: process.env.HUBOT_EMAILTAG_TO_DOMAIN
 
-api_key = process.env.HUBOT_MAILGUN_APIKEY
-mg_domain = process.env.HUBOT_MAILGUN_DOMAIN
-
-to_domain = process.env.HUBOT_EMAILTAG_TO_DOMAIN
-
-
+unless config.api_key
+  console.log "Please set the HUBOT_MAILGUN_APIKEY environment variable."
+unless config.mg_domain
+  console.log "Please set the HUBOT_MAILGUN_DOMAIN environment variable."
+unless config.to_domain
+  console.log "Please set the HUBOT_EMAILTAG_TO_DOMAIN environment variable."
 
 module.exports = (robot) ->
   robot.hear /#email:([\w\.-]+)/i, (msg) ->
@@ -30,16 +34,16 @@ module.exports = (robot) ->
     from = msg.message.user.name
     room = msg.message.room
 
-    mailgun = new Mailgun api_key, mg_domain
+    mailgun = new Mailgun config.api_key, config.mg_domain
 
     email_data =
-      from: "#{from} <noreply@#{to_domain}>"
-      to: "#{to}@#{to_domain}"
+      from: "#{from} <noreply@#{config.to_domain}>"
+      to: "#{to}@#{config.to_domain}"
       subject: "Slack message from #{from} in #{room}"
       text: msg.message.text
 
-    mailgun.messages.send data, (error, response, body) ->
+    mailgun.messages.send email_data, (error, response, body) ->
       if error?
-        msg.send "Unable to send email!"
+        msg.send "Unable to send email to #{to}@#{config.to_domain}!"
       else
-        msg.send "Email sent to #{to}@#{to_domain}!"
+        msg.send "Email sent to #{to}@#{config.to_domain}!"

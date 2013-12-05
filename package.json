@@ -1,6 +1,6 @@
 {
   "name": "hubot-email-hashtag",
-  "description": "A hubot script that sends hashtagged messages to a specified email address.",
+  "description": "A hubot script that sends hashtagged messages to arbitrary email addresses on a given domain.",
   "version": "0.0.1",
   "author": "Patrick Connolly <patrick@myplanetdigital.com>",
   "license": "MIT",

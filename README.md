@@ -1,6 +1,6 @@
 # Hubot: hubot-email-hashtag
 
-A hubot script that sends hashtagged messages to a specified email address.
+A hubot script that sends hashtagged messages to arbitrary email addresses on a given domain.
 
 See [`src/email-hashtag.coffee`](src/email-hashtag.coffee) for full documentation.
 
